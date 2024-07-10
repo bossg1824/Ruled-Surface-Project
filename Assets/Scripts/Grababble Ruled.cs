@@ -178,9 +178,8 @@ public class GrababbleRuled : MonoBehaviour
         surfaceGenerator.NumPoints = NumPoints;
         surfaceGenerator.offset1 = Quaternion.Inverse(transform.localRotation) * (child1.position - transform.position);
         surfaceGenerator.offset2 = Quaternion.Inverse(transform.localRotation) * (child2.position - transform.position);
-        //still need to fix rotation, should probably manually calculate the function to do so
-        surfaceGenerator.Rotation1 = (Quaternion.Inverse(transform.rotation) * child1.rotation).eulerAngles; // - (child1.rotation * transform.rotation).eulerAngles;
-        surfaceGenerator.Rotation2 = (Quaternion.Inverse(transform.rotation) * child2.rotation).eulerAngles; // - (child2.rotation * transform.rotation).eulerAngles;
+        surfaceGenerator.Rotation1 = (Quaternion.Inverse(transform.rotation) * child1.rotation).eulerAngles;
+        surfaceGenerator.Rotation2 = (Quaternion.Inverse(transform.rotation) * child2.rotation).eulerAngles;
         surfaceGenerator.Function_1 = Function_1;
         surfaceGenerator.Function_2 = Function_2;
         surfaceGenerator.Scale1 = Scale1;
@@ -260,13 +259,11 @@ public class GrababbleRuled : MonoBehaviour
                     if (which == 1)
                     {
                         childBoxes.colliders.Remove(child1Skeleton[i].GetComponent<Collider>());
-                       // wholeBoxes.colliders.Remove(child1Skeleton[i].GetComponent<Collider>());
                         Destroy(child1Skeleton[i].gameObject);
                     }
                     else
                     {
                         childBoxes.colliders.Remove(child2Skeleton[i].GetComponent<Collider>());
-                       // wholeBoxes.colliders.Remove(child2Skeleton[i].GetComponent<Collider>());
                         Destroy(child2Skeleton[i].gameObject);
                     }
 
@@ -286,8 +283,6 @@ public class GrababbleRuled : MonoBehaviour
                 //unrigestering and re registering the colliders for the xr grabbable script
                 childBoxes.interactionManager.UnregisterInteractable(childBoxes.GetComponent<IXRInteractable>());
                 childBoxes.interactionManager.RegisterInteractable(childBoxes.GetComponent<IXRInteractable>());
-                //wholeBoxes.interactionManager.UnregisterInteractable(childBoxes.GetComponent<IXRInteractable>());
-               // wholeBoxes.interactionManager.RegisterInteractable(childBoxes.GetComponent<IXRInteractable>());
         }
         
 
@@ -313,9 +308,9 @@ public class GrababbleRuled : MonoBehaviour
     {
 
         Transform child = which == 1 ? child1 : child2;
-        Vector3[] points = which == 1 ? func(OutsidePoints, Scale1, Negative1, timesThrough1, Vector3.zero, Quaternion.Euler(Rotation1)) : func(OutsidePoints, Scale2, Negative2, timesThrough2, Vector3.zero, Quaternion.Euler(Rotation2));
+        Vector3[] points = which == 1 ? func(OutsidePoints, Scale1, Negative1, timesThrough1, Vector3.zero, Quaternion.identity) : func(OutsidePoints, Scale2, Negative2, timesThrough2, Vector3.zero, Quaternion.identity);
 
-        //fixing the position of the second curve (needs to account for the offset given)
+        //fixing the position of the second curve (needs to account for the offset given) only on the start though
         if (which == 2 && init)
         {
             child2.localPosition += offset;

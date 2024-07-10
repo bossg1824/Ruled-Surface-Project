@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Ruling
   - Hands
+  - Rulled Surface
+  - Developable Ruled Surface
+  - Conoid
+  - Non-Developable Ruled Surface
   layers:
   - Default
   - TransparentFX

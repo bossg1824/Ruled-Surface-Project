@@ -45,9 +45,10 @@ public class PedistalScript : MonoBehaviour
     [SerializeField]
     public int LevelsOfParentageAllowed;
 
-    private Transform storedObject = null;
+    [SerializeField]
+    public Transform startWith;
 
-    private Transform previouslyStored = null;
+    private Transform storedObject = null;
 
     private Rigidbody storedRigid = null;
 
@@ -64,6 +65,9 @@ public class PedistalScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        storedObject = startWith;
+        SetupStore();
+
         foreach(Collider c in transform.GetComponents<Collider>())
         {
             if (c.isTrigger)
@@ -126,8 +130,12 @@ public class PedistalScript : MonoBehaviour
             }
             tracking = tracking.parent;
         }
+        SetupStore();
+    }
 
-        if(storedObject == null)
+    private void SetupStore()
+    {
+        if (storedObject == null)
         {
             return;
         }
@@ -145,18 +153,16 @@ public class PedistalScript : MonoBehaviour
         //getting the XRGrab component of the other object
         storedGrab = storedObject.GetComponent<XRGrabInteractable>();
         //if a grab component exists
-        if(storedGrab != null)
+        if (storedGrab != null)
         {
             //Add a listener to the selectEntered so that we release this object once it is grabbed again
             storedGrab.selectEntered.AddListener(ReleaseProxy);
-            Debug.Log("Added Listener");
         }
-        foreach(Collider c in triggers)
+        foreach (Collider c in triggers)
         {
             c.enabled = false;
         }
     }
-
     public bool OnCheck()
     {
         //if there is no stored object
@@ -201,15 +207,10 @@ public class PedistalScript : MonoBehaviour
             storedRigid = null;
         }
 
-        previouslyStored = null;
 
         //No longer store the Object
         storedObject = null;
 
-        //foreach(Collider c in triggers)
-        //{
-        //    c.enabled = true;
-        //}
         timer = 0;
     }
 }
