@@ -60,13 +60,13 @@ public class PedistalScript : MonoBehaviour
 
     private float timer = 0;
 
-    private float timeToRefresh = 5;
+    public float timeToRefresh = 5;
 
     // Start is called before the first frame update
     void Start()
     {
         storedObject = startWith;
-        SetupStore();
+        
 
         foreach(Collider c in transform.GetComponents<Collider>())
         {
@@ -75,6 +75,8 @@ public class PedistalScript : MonoBehaviour
                 triggers.Add(c);
             }
         }
+
+        SetupStore();
     }
 
     // Update is called once per frame
@@ -201,7 +203,7 @@ public class PedistalScript : MonoBehaviour
         if (storedRigid != null)
         {
             //Set the Kinemacity back to what it originally was
-            storedRigid.isKinematic = ObjectKinematic;
+            storedRigid.isKinematic = false;
 
             //No longer store the rigid body
             storedRigid = null;

@@ -70,6 +70,10 @@ public class GrababbleRuled : MonoBehaviour
 
     [SerializeField]
     bool showPoints;
+
+    [SerializeField]
+    bool outsidesGrabbable;
+
     //to detect if any changes have been made
     private string serialNo;
 
@@ -237,14 +241,26 @@ public class GrababbleRuled : MonoBehaviour
                     if (which == 1)
                     {
                         child1Skeleton[i] = Instantiate(OutsidePrefab, child);
-                        childBoxes.colliders.Add(child1Skeleton[i].GetComponent<Collider>());
-                        //wholeBoxes.colliders.Add(child1Skeleton[i].GetComponent<Collider>());
+                        if (outsidesGrabbable)
+                        {
+                            childBoxes.colliders.Add(child1Skeleton[i].GetComponent<Collider>());
+                        }
+                        else
+                        {
+                            wholeBoxes.colliders.Add(child1Skeleton[i].GetComponent<Collider>());
+                        }
                     }
                     else
                     {
                         child2Skeleton[i] = Instantiate(OutsidePrefab, child);
-                        childBoxes.colliders.Add(child2Skeleton[i].GetComponent<Collider>());
-                       // wholeBoxes.colliders.Add(child2Skeleton[i].GetComponent<Collider>());
+                        if (outsidesGrabbable)
+                        {
+                            childBoxes.colliders.Add(child2Skeleton[i].GetComponent<Collider>());
+                        }
+                        else
+                        {
+                            wholeBoxes.colliders.Add(child2Skeleton[i].GetComponent<Collider>());
+                        }
                     }
 
                 }
@@ -258,12 +274,24 @@ public class GrababbleRuled : MonoBehaviour
                 {
                     if (which == 1)
                     {
-                        childBoxes.colliders.Remove(child1Skeleton[i].GetComponent<Collider>());
+                        if (outsidesGrabbable)
+                        {
+                            childBoxes.colliders.Remove(child1Skeleton[i].GetComponent<Collider>());
+                        } else
+                        {
+                            wholeBoxes.colliders.Remove(child1Skeleton[i].GetComponent<Collider>());
+                        }
                         Destroy(child1Skeleton[i].gameObject);
                     }
                     else
                     {
-                        childBoxes.colliders.Remove(child2Skeleton[i].GetComponent<Collider>());
+                        if (outsidesGrabbable)
+                        {
+                            childBoxes.colliders.Remove(child2Skeleton[i].GetComponent<Collider>());
+                        } else
+                        {
+                            wholeBoxes.colliders.Remove(child1Skeleton[i].GetComponent<Collider>());
+                        }
                         Destroy(child2Skeleton[i].gameObject);
                     }
 
@@ -280,9 +308,16 @@ public class GrababbleRuled : MonoBehaviour
                 }
             }
 
-                //unrigestering and re registering the colliders for the xr grabbable script
+            //unrigestering and re registering the colliders for the xr grabbable script
+            if (outsidesGrabbable)
+            {
                 childBoxes.interactionManager.UnregisterInteractable(childBoxes.GetComponent<IXRInteractable>());
                 childBoxes.interactionManager.RegisterInteractable(childBoxes.GetComponent<IXRInteractable>());
+            } else
+            {
+                wholeBoxes.interactionManager.UnregisterInteractable(childBoxes.GetComponent<IXRInteractable>());
+                wholeBoxes.interactionManager.RegisterInteractable(childBoxes.GetComponent<IXRInteractable>());
+            }
         }
         
 
