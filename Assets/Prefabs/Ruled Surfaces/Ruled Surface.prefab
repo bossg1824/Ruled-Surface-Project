@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2463307906906840695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7262936452186694498}
+  - component: {fileID: 2580349008068094888}
+  m_Layer: 0
+  m_Name: Ruled Surface
+  m_TagString: Rulled Surface
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7262936452186694498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2463307906906840695}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.18600349, y: 9.475701, z: 0.707703}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2580349008068094888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2463307906906840695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1523f90756cdfd4ea89833400d36d65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Function_1: 0
+  Negative1: 0
+  Scale1: 0.15
+  timesThrough1: 1
+  Rotation1: {x: 0, y: 0, z: 0}
+  Function_2: 0
+  Negative2: 0
+  Scale2: 0.15
+  timesThrough2: 1
+  NumPoints: 100
+  OutsidePoints: 300
+  OutsideDiameter: 0.01
+  Rotation2: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 0, z: 0}
+  cylinderPrefab: {fileID: 7915273599144546100, guid: 25c5fbb6bc1ebe746aa26d34721d09f0,
+    type: 3}
+  pointPrefab: {fileID: 1480056606531779143, guid: 2cb60b52572cfdb42a19ee1b5abef8a9,
+    type: 3}
+  OutsidePrefab: {fileID: 7915273599144546100, guid: 25c5fbb6bc1ebe746aa26d34721d09f0,
+    type: 3}
+  threadRadius: 0.01
+  pointSize: 0.01
+  showPoints: 0
+  outsidesGrabbable: 0

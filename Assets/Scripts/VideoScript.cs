@@ -1,22 +1,14 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
-
 public class VideoScript : MonoBehaviour
 {
     public VideoPlayer player;
 
-    [Serializable]
-    public class VideoEvent 
-    {
-        public Transform ToShow;
-        public float TimeToShowAt;
-    }
+    
 
     [SerializeField]
-    public List<VideoEvent> events;
+    public List<TimeEvent> events;
 
     public void Start()
     {
@@ -24,7 +16,7 @@ public class VideoScript : MonoBehaviour
         {
             player = GetComponent<VideoPlayer>();
         }
-        foreach(VideoEvent e in events)
+        foreach(TimeEvent e in events)
         {
             e.ToShow.gameObject.SetActive(false);
         }
@@ -34,7 +26,7 @@ public class VideoScript : MonoBehaviour
     {
         if (player.isPlaying)
         {
-            foreach(VideoEvent e in events)
+            foreach(TimeEvent e in events)
             {
                 if(player.clockTime >= e.TimeToShowAt)
                 {
