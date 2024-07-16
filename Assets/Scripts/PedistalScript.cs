@@ -157,6 +157,7 @@ public class PedistalScript : MonoBehaviour
         //if a grab component exists
         if (storedGrab != null)
         {
+
             //Add a listener to the selectEntered so that we release this object once it is grabbed again
             storedGrab.selectEntered.AddListener(ReleaseProxy);
         }
