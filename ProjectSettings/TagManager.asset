@@ -9,7 +9,7 @@ TagManager:
   - Rulled Surface
   - Developable Ruled Surface
   - Conoid
-  - Non-Developable Ruled Surface
+  - Non Developable Ruled Surface
   layers:
   - Default
   - TransparentFX
@@ -17,8 +17,8 @@ TagManager:
   - ruilings
   - Water
   - UI
-  - 
-  - 
+  - Intersector Outside
+  - Intersector Plane
   - 
   - 
   - 

@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: d672962a83adf85499c1c290b428dd05
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - MarchingShader: {instanceID: 0}
+  - NoiseGenerator: {instanceID: 0}
+  - surfaceControl: {instanceID: 0}
+  - segmentMat: {instanceID: 0}
+  - segmentMesh: {instanceID: 0}
+  - segmentPrefab: {instanceID: 0}
+  - planeIntersectParent: {instanceID: 0}
+  - grabPlane: {instanceID: 0}
+  - closestSurface: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

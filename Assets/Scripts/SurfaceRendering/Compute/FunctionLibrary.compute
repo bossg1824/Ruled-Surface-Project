@@ -1,0 +1,163 @@
+﻿#pragma kernel GenerateNoise
+#pragma kernel GenerateNoisePlane
+
+#include "Includes\FastNoiseLite.compute"
+#include "Includes\MetricsCompute.compute"
+
+RWStructuredBuffer<float> _Weights;
+
+uint _IsPlane;
+uint _Function;
+float _Size;
+float _Scale;
+float _Amplitude;
+float _Frequency;
+float _OtherSize;
+float3 _Offset;
+float3 _PlaneRight;
+float3 _PlaneForward;
+uint _Orientation;
+float _MuSquaredActual;
+
+
+
+float valCalc(float3 pos){
+    float w = 1.0f;
+    float val = 0;
+    float x = pos.x;
+    float y = pos.y;
+    float z = pos.z;
+        /*w *= 2;
+        x *= 3;
+        y *= 3;
+        z *= 3;*/
+        
+    switch (_Function)
+    {
+
+        case 0:
+            /*float p = w - z - sqrt(2) * x;
+            float q = w - z + sqrt(2) * x;
+            float r = w + z + sqrt(2) * y;
+            float s = w + z - sqrt(2) * y;
+
+            float lambda = (3 *  _MuSquaredActual - 1) / (3 - _MuSquaredActual);
+            //float equation = 
+            val = ((x * x) + (y * y) + (z * z) - ( _MuSquaredActual * (w * w))) * ((x * x) + (y * y) + (z * z) - ( _MuSquaredActual * (w * w))) - (lambda * (p * q * r * s));
+            //x * x + y * y + z * z - 1;
+        //           Mathf.Pow(Mathf.Pow(x, 2) + Mathf.Pow(y, 2) + Mathf.Pow(z, 2) - (muSquared * Mathf.Pow(w, 2)), 2)
+            //if (equation < 0.001f)
+            //{
+            
+            //}
+            break;
+        */
+            val = -(x*x)+(z*z)+(y*y);
+            break;
+
+        case 1:
+
+ val = (4*(x*x*x)) + (3*(x*x)*z) -(7*(x*x)) -(12*x*(y*y)) + (3*(y*y)*z) -(7*(y*y)) -(7*(z*z*z)) -(12*(z*z)) -3*z + 2;
+            break;
+        case 2:
+        x *= 3;
+        y *= 3;
+        z *= 3;
+val = (x*x)*y -((9*x*x)/10) + (x*y*y) -(2*x*y) + (x*z*z) + ((4*x)/5) -((9*y*y)/10) + (y*z*z) + ((4*y)/5) + (z*z*z) -2*(z*z) + (1/5);
+            break;
+        case 3:
+            val = 2*((x*x) + (y*y))*(1-y) + 2*x*((z*z)-2*(x*x)-4*(y*y));
+            break;
+        case 4:
+            val = -(x*y*y)-(x*y*z)+(x*y)-(y*y*z)-(z*z*z);
+            break;
+        case 5:
+            val = (x*x*x)+(x*z)-(x*x*z)+(y*y*z)-(z*z*z);
+            break;
+        case 6: //D_4
+            val = -((x*x*x)/2) -((3*x*x*y)/2)-((3*x*x*z)/2)+((x*x)/2)-((3*x*y*y)/2)-(2*x*y*z)+(x*y)-((3*x*z*z)/2)+(x*z)-((y*y*y)/2)-((3*y*y*z)/2)+((y*y)/2)-((3*y*z*z)/2)+(y*z)-((z*z*z)/2)+((z*z)/2);
+            break;
+        case 7: //D_5
+            val = (x*x*x)+(x*x)+(x*z*z)+(y*y*z);
+            break;
+        case 8: //E_6
+            val = (x*x)-(x*x*x)-(x*x*y)+(y*y*y)-(x*z*z);
+            break;
+/*
+A_1: (0,0, -1)
+A_2: (1,1, 0)
+A_3: (0,0,0)
+A_4: (0,0,0)
+A_5: x^3 + x z - x^2 z + y^2 z - z^3 = 0 | (0,0,0)
+D_4:-x^3/2-3 x^2 y /2-3 x^2 z/2+x^2 /2-3 x y^2 /2-2 x y z + x y-3 x z^2 /2+x z-y^3 /2-3 y^2 z /2+y^2 /2-3 y z^2 /2+y z-z^3 /2+z^2/2 =0| (0,0,0)
+D_5: x^3+x^2+x z^2+y^2 z = 0| (0,0,0)
+E_6: x^2 - x^3 - x^2 y + y^3 - x z^2 = 0| (0,0,0)
+Cassini Surface ( two A_3) singularities: ((x -­ 1)^2 + y^2) ((x + 1)^2 + y^2) -z^4= 0 | (1,0,0), (-1,0,0)
+
+    case 1:
+    val = (x*x)-(z*z)+(y*y);
+break;
+*/
+    }
+
+    return val;
+}
+
+
+float3 ExchangeAxis(float3 vec){
+    float3 newVec = vec;
+    switch(_Orientation){        
+        case 0:
+            newVec.z = vec.y;
+            newVec.y = vec.z;
+            break;
+        case 1:
+            newVec.y = vec.x;
+            newVec.z = vec.y;
+            newVec.x = vec.z;
+            break;
+        case 2:
+            newVec.z = vec.x;
+            newVec.x = vec.z;
+            break;
+    }
+    return newVec;
+}
+
+
+
+[numthreads(numThreads, numThreads, numThreads)]
+void GenerateNoise(uint3 id : SV_DispatchThreadID)
+{
+    
+    float3 pos = ((id - float3(1, 1, 1) * _ChunkSize / 2.0f)*_OtherSize + _Offset) / _Scale;
+    _Weights[indexFromCoord(id.x, id.y, id.z)] = 0;
+    pos = ExchangeAxis(pos);
+
+    float val = valCalc(pos);
+
+    if (val <= _Amplitude)
+    {
+        float sigmoid = 1 / (1 + exp(val));
+        _Weights[indexFromCoord(id.x, id.y, id.z)] = sigmoid;        
+    }
+}
+
+[numthreads(numThreads, numThreads, 1)]
+void GenerateNoisePlane(uint3 id : SV_DispatchThreadID)
+{
+
+    float3 pos = ((id.x - _ChunkSize / 2.0f) * _PlaneRight + (id.y - _ChunkSize / 2.0f) * _PlaneForward + _Offset) / _Scale;
+    _Weights[indexFromCoord(id.x, id.y, 0)] = 0;
+    pos = ExchangeAxis(pos);
+    
+
+    float val = valCalc(pos);
+
+    if (val <= _Amplitude)
+    {
+        float sigmoid = 1 / (1 + exp(val));
+        _Weights[indexFromCoord(id.x, id.y, 0)] = sigmoid;
+        
+    }
+}
