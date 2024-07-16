@@ -74,6 +74,8 @@ public class GrababbleRuled : MonoBehaviour
     [SerializeField]
     bool outsidesGrabbable;
 
+    [SerializeField]
+    String TagForOutsides;
     //to detect if any changes have been made
     private string serialNo;
 
@@ -241,6 +243,7 @@ public class GrababbleRuled : MonoBehaviour
                     if (which == 1)
                     {
                         child1Skeleton[i] = Instantiate(OutsidePrefab, child);
+                        child1Skeleton[i].tag = TagForOutsides;
                         if (outsidesGrabbable)
                         {
                             childBoxes.colliders.Add(child1Skeleton[i].GetComponent<Collider>());
@@ -253,6 +256,7 @@ public class GrababbleRuled : MonoBehaviour
                     else
                     {
                         child2Skeleton[i] = Instantiate(OutsidePrefab, child);
+                        child2Skeleton[i].tag = TagForOutsides;
                         if (outsidesGrabbable)
                         {
                             childBoxes.colliders.Add(child2Skeleton[i].GetComponent<Collider>());

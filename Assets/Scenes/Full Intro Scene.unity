@@ -509,7 +509,7 @@ MonoBehaviour:
     TimeToShowAt: 7
   - ToShow: {fileID: 1528113286}
     TimeToShowAt: 10
-  ExtraTimeForAlll: 0
+  ExtraTimeForAlll: 3
   TimeMultForAll: 2
 --- !u!4 &200264178
 Transform:
@@ -598,6 +598,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Poster 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c04a4efbee2ae0744932a90f6d7ff7ab,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4083501151425157549, guid: c04a4efbee2ae0744932a90f6d7ff7ab,
         type: 3}
@@ -767,7 +772,7 @@ PrefabInstance:
     - target: {fileID: 6859289045715944910, guid: 4e56ed288fb94f34099120641d97ab7f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7
+      value: 6.4
       objectReference: {fileID: 0}
     - target: {fileID: 6859289045715944910, guid: 4e56ed288fb94f34099120641d97ab7f,
         type: 3}
@@ -1209,6 +1214,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Poster (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7917046402748211569, guid: ceeeb8148af2f644cb9597dff6a4cdc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1227,6 +1237,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 9a099156c9762a645a5e06fe6712af58, type: 2}
+    - target: {fileID: 1858268757324799024, guid: ceeeb8148af2f644cb9597dff6a4cdc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7391866509949615051, guid: ceeeb8148af2f644cb9597dff6a4cdc0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1354,6 +1369,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Poster
+      objectReference: {fileID: 0}
+    - target: {fileID: 7917046402748211569, guid: ceeeb8148af2f644cb9597dff6a4cdc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1519,6 +1539,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Poster A
+      objectReference: {fileID: 0}
+    - target: {fileID: 1858268757324799024, guid: ceeeb8148af2f644cb9597dff6a4cdc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6463814151537034637, guid: ceeeb8148af2f644cb9597dff6a4cdc0,
         type: 3}
