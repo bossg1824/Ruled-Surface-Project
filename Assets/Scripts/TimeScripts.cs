@@ -8,13 +8,16 @@ public class TimeScripts : MonoBehaviour
     public bool releasing;
     public List<TimeEvent> events;
     public float ExtraTimeForAlll;
+    public float TimeMultForAll = 1;
     private float timer = 0;
     void Start()
     {
         foreach(TimeEvent e in events)
         {
             e.ToShow.gameObject.SetActive(false);
+            e.TimeToShowAt *= TimeMultForAll;
             e.TimeToShowAt += ExtraTimeForAlll;
+            Debug.Log(e.ToString());
         }
         timer = 0;
     }
@@ -26,12 +29,17 @@ public class TimeScripts : MonoBehaviour
         {
             return;
         }
-        foreach(TimeEvent e in events)
+        for(int i = 0; i < events.Count; i++)
         {
+            TimeEvent e = events[i];
             if(timer >= e.TimeToShowAt)
             {
+                Debug.Log("Time: " + timer);
+                Debug.Log("Object: " + e.ToShow);
+                Debug.Log("GameObject: " + e.ToShow.gameObject);
                 e.ToShow.gameObject.SetActive(true);
                 events.Remove(e);
+                i--;
             }
         }
         timer += Time.deltaTime;
