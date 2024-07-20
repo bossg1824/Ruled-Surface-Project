@@ -29,7 +29,7 @@ public class ButtonScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Hands"))
         {
-            transform.position = pos + down;
+            transform.position = pos + transform.localRotation * down;
         }
 
     }

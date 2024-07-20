@@ -30,7 +30,7 @@ public class VideoScript : MonoBehaviour
             {
                 if(player.clockTime >= e.TimeToShowAt)
                 {
-                    e.ToShow.gameObject.SetActive(true);
+                    e.ToShow.gameObject.SetActive(!e.ToShow.gameObject.active);
                 }
             }
         }   

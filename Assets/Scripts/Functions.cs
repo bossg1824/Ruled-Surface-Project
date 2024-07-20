@@ -8,8 +8,8 @@ public class Functions
 {
     public delegate Vector3[] Function(int numpoints, float scale, bool negatives, float timesThrough, Vector3 offset, Quaternion rotation);
 
-    public enum FunctionName { Circle, Line, Helix, Parabola, CircleSine, SinLine };
-    static Function[] functions = { Circle, Line, Helix, Parabola, CircleSine, SinLine };
+    public enum FunctionName { Circle, Line, Helix, Parabola, CircleSine, SinLine, Oloid1, Oloid2 };
+    static Function[] functions = { Circle, Line, Helix, Parabola, CircleSine, SinLine, Oloid1, Oloid2 };
 
 
     public static Function GetFunction(int index)
@@ -116,6 +116,40 @@ public class Functions
             next.z = scale * Sin(progress);
             next.y = 0;
             next.x = 0;
+            vals[i] = next;
+        }
+        ApplyOfRot(vals, offset, rotation);
+        return vals;
+    }
+
+    public static Vector3[] Oloid1(int numpoints, float scale, bool negatives, float timesThrough, Vector3 offset, Quaternion rotation) 
+    {
+        Vector3[] vals = new Vector3[numpoints];
+
+        for (int i = 0, j = negatives ? -(numpoints / 2) : 0; i < numpoints; i++, j++)
+        {
+            Vector3 next = new Vector3();
+            float progress = 2 * PI * j * timesThrough / (float)numpoints;
+            next.x = scale * Cos(progress);
+            next.y = 0;
+            next.z = scale * Sin(progress);
+            vals[i] = next;
+        }
+        ApplyOfRot(vals, offset, rotation);
+        return vals;
+    }
+
+    public static Vector3[] Oloid2(int numpoints, float scale, bool negatives, float timesThrough, Vector3 offset, Quaternion rotation)
+    {
+        Vector3[] vals = new Vector3[numpoints];
+
+        for (int i = 0, j = negatives ? -(numpoints / 2) : 0; i < numpoints; i++, j++)
+        {
+            Vector3 next = new Vector3();
+            float progress = 2 * PI * j * timesThrough / (float)numpoints;
+            next.x = 0;
+            next.y = scale * Sin(progress);
+            next.z = scale * Cos(progress);
             vals[i] = next;
         }
         ApplyOfRot(vals, offset, rotation);

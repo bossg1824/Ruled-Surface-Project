@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class ButtonFunctions
 {
     public delegate void buttonFunction(Transform target);
-    public enum buttonFuncName {ToIntro, ToDevelopable, ToQuadrics, ToCubics, ToQuartics, Check};
-    public static buttonFunction[] buttonFunctions = {ToIntro, ToDevelopable, ToQuadrics, ToCubics, ToQuartics, Check};
+    public enum buttonFuncName {ToIntro, ToDevelopable, ToQuadrics, ToCubics, ToQuartics, Check, FastForward, Rewind, StartStop};
+    public static buttonFunction[] buttonFunctions = {ToIntro, ToDevelopable, ToQuadrics, ToCubics, ToQuartics, Check, FastForward, Rewind, StartStop};
 
     public static buttonFunction GetButtonFunction(int index)
     {
@@ -64,6 +65,63 @@ public class ButtonFunctions
             {
                 l.color = success ? Color.red : Color.green;
             }
+        }
+    }
+
+    public static void FastForward(Transform target)
+    {
+        VideoPlayer videoPlayer = target.GetComponent<VideoPlayer>();
+        if (videoPlayer == null)
+        {
+            return;
+        }
+        if(videoPlayer.time == 0)
+        {
+            return;
+        }
+        if(videoPlayer.length < videoPlayer.time + 10)
+        {
+            videoPlayer.time = videoPlayer.length;
+        } else
+        {
+            videoPlayer.time += 10;
+        }
+    }
+
+    public static void Rewind(Transform target)
+    {
+        VideoPlayer videoPlayer = target.GetComponent<VideoPlayer>();
+        if(videoPlayer == null)
+        {
+            return;
+        }
+        if (videoPlayer.time == 0)
+        {
+            return;
+        }
+        if(videoPlayer.time - 10 < 0)
+        {
+            videoPlayer.time = 0;
+        } else
+        {
+            videoPlayer.time -= 10;
+        }
+
+    }
+
+    public static void StartStop(Transform target)
+    {
+        VideoPlayer video= target.GetComponent<VideoPlayer>();
+        Renderer renderer = target.GetComponent<Renderer>();
+        if (video.isPlaying)
+        {
+            video.Pause();
+            renderer.enabled = false;
+        }
+        else
+        {
+            video.Play();
+            renderer.enabled = true;
         }
     }
 }
