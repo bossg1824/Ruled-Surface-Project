@@ -5,6 +5,9 @@ using UnityEngine.Video;
 
 public class VideoScreenScript : MonoBehaviour
 {
+    [SerializeField]
+    public PausePlayScript button; 
+
     private VideoPlayer player;
     private Renderer renderer;
     // Start is called before the first frame update
@@ -23,6 +26,7 @@ public class VideoScreenScript : MonoBehaviour
             player.time = 0;
             player.Stop();
             renderer.enabled = false;
+            button.PauseOrPlay = PausePlayScript.state.pause;
         }
     }
 }

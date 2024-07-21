@@ -3,29 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor;
-using UnityEditor.ShaderKeywordFilter;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class PedistalScript : MonoBehaviour
 {
-    /*private string selectedTag = " ";
-
-    [CustomEditor(typeof(DevelopableSurfacePlaneLocker))]
-    public class DevelopableSurfacePlaneLockerEditor : Editor
-    {
-        string selectedTag = " ";
-        public override void OnInspectorGUI()
-        {
-            DrawDefaultInspector();
-
-            selectedTag = EditorGUI.TagField(new Rect(3,3,3,3), "New Tag", selectedTag);
-
-        }
-    }
-    */
 
     [SerializeField]
     public string[] TagsToGrab;

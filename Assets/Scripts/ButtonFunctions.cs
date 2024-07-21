@@ -8,8 +8,8 @@ using UnityEngine.Video;
 public class ButtonFunctions
 {
     public delegate void buttonFunction(Transform target);
-    public enum buttonFuncName {ToIntro, ToDevelopable, ToQuadrics, ToCubics, ToQuartics, Check, FastForward, Rewind, StartStop};
-    public static buttonFunction[] buttonFunctions = {ToIntro, ToDevelopable, ToQuadrics, ToCubics, ToQuartics, Check, FastForward, Rewind, StartStop};
+    public enum buttonFuncName {ToIntro, ToDevelopable, ToQuadrics, ToCubics, ToQuartics, Check, FastForward, Rewind, StartStop, ChangeButtonStartOrStop};
+    public static buttonFunction[] buttonFunctions = {ToIntro, ToDevelopable, ToQuadrics, ToCubics, ToQuartics, Check, FastForward, Rewind, StartStop, ChangeButtonStartStop};
 
     public static buttonFunction GetButtonFunction(int index)
     {
@@ -122,6 +122,14 @@ public class ButtonFunctions
         {
             video.Play();
             renderer.enabled = true;
+        }
+    }
+    public static void ChangeButtonStartStop(Transform target)
+    {
+        PausePlayScript button = target.GetComponent<PausePlayScript>();
+        if(button != null)
+        {
+            button.PauseOrPlay = button.PauseOrPlay == PausePlayScript.state.play ? PausePlayScript.state.pause : PausePlayScript.state.play;
         }
     }
 }
