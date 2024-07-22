@@ -157,7 +157,7 @@ public class Vector_Array : MonoBehaviour
                 point1.localScale = newscale;
                 point2.localScale = newscale;
             }
-            cyl.tag = tagForRulings;
+            cyl.tag = "Ruling";
             lines[i] = cyl;
             
             //Changing the length of each line (treating the y scale as the distance)
@@ -324,7 +324,19 @@ public class Vector_Array : MonoBehaviour
 
         }
     }
-
+    
+    public Color getRulingColor()
+    {
+        return cylinderPrefab.GetComponent<Renderer>().sharedMaterial.color;
+    }
+    public void changeRulingColor(Color changeTo)
+    {
+        foreach (Transform t in lines)
+        {
+            Debug.Log("Changing Color");
+            t.GetComponent<Renderer>().material.color = changeTo;
+        }
+    }
     private string retSerial()
     {
         return manual_Input ? "" + cylinderPrefab + pointPrefab + threadRadius + OtherFuncs.ReturnArray(firstPoints) + OtherFuncs.ReturnArray(secondPoints) : 

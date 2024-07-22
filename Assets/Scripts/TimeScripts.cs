@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.AffordanceSystem.Receiver.Primitives;
+using static TimeFunctions;
 
 public class TimeScripts : MonoBehaviour
 {
@@ -37,7 +38,8 @@ public class TimeScripts : MonoBehaviour
                 Debug.Log("Time: " + timer);
                 Debug.Log("Object: " + e.ToShow);
                 Debug.Log("GameObject: " + e.ToShow.gameObject);
-                e.ToShow.gameObject.SetActive(true);
+                Debug.Log("Doing: " + e.ToDo);
+                GetTimeFunction(e.ToDo)(e.ToShow);
                 events.Remove(e);
                 i--;
             }

@@ -54,13 +54,13 @@ public class GrababbleRuled : MonoBehaviour
     Vector3 offset;
 
     [SerializeField]
-    Transform cylinderPrefab;
+    public Transform cylinderPrefab;
 
     [SerializeField]
-    Transform pointPrefab;
+    public Transform pointPrefab;
 
     [SerializeField]
-    Transform OutsidePrefab;
+    public Transform OutsidePrefab;
 
     [SerializeField, Range(0, 1)]
     float threadRadius;
@@ -198,6 +198,45 @@ public class GrababbleRuled : MonoBehaviour
 
     }
 
+    public Color getOutsideColor()
+    {
+        return OutsidePrefab.GetComponent<Renderer>().sharedMaterial.color;
+    }
+
+    public Color getRulingColor()
+    {
+        return surfaceGenerator.getRulingColor();
+    }
+
+    public void changeRulingColor(Color ChangeTo)
+    {
+        surfaceGenerator.changeRulingColor(ChangeTo);
+    }
+
+    public void changeOutsideColor(int which, Color ChangeTo)
+    {
+        switch (which)
+        {
+            case 1:
+                changeOutsideColor(child1Skeleton, ChangeTo);
+                break;
+            case 2:
+                changeOutsideColor(child2Skeleton, ChangeTo);
+                break;
+            case 3:
+                changeOutsideColor(child1Skeleton, ChangeTo);
+                changeOutsideColor(child2Skeleton, ChangeTo);
+                break;
+        }
+    }
+
+    private void changeOutsideColor(Transform[] which, Color ChangeTo)
+    {
+        for(int i = 0; i < which.Length - 1; i++)
+        {
+            which[i].GetComponent<Renderer>().material.color = ChangeTo;
+        }
+    }
     private string retSerial()
     {
         return "" + Function_1 + Negative1 + Scale1 + timesThrough1 + child1.localRotation + Function_2 + Negative2 + Scale2 + timesThrough2 + child2.localRotation + NumPoints + child1.localPosition + child2.localPosition + cylinderPrefab + pointPrefab + threadRadius + OutsidePoints;

@@ -47,7 +47,7 @@ float valCalc(float3 pos){
             val = tan(z) * x - y;
             break;
         case 5:
-            val = (x * x - y * y - z) * (x * x + y * y - 4);
+            val = (x * x - y * y - z) * (x * x + y * y - 2);
             break;
 
     }

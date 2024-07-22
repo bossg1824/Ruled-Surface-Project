@@ -27,7 +27,9 @@ public class PausePlayScript : MonoBehaviour
         {
             return;
         }
+        Debug.Log("Switching States");
         StateSwitch(PauseOrPlay == state.play);
+        PreviousState= PauseOrPlay;
     }
     private void StateSwitch(bool Play)
     {

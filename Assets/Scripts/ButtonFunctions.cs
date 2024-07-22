@@ -23,24 +23,63 @@ public class ButtonFunctions
 
     public static void ToIntro(Transform target)
     {
-        SceneManager.LoadScene("Intro");
+        SceneTransition transition = target.GetComponent<SceneTransition>();
+        if (transition != null)
+        {
+            transition.GoToScene("Intro");
+        } else
+        {
+            SceneManager.LoadScene("Intro");
+        }
     }
 
     public static void ToDevelopable(Transform target)
     {
-        SceneManager.LoadScene("Developable");
+        SceneTransition transition = target.GetComponent<SceneTransition>();
+        if (transition != null)
+        {
+            transition.GoToScene("Developable Surfaces");
+        }
+        else
+        {
+            SceneManager.LoadScene("Developable Surfaces");
+        }
     }
     public static void ToQuadrics(Transform target)
     {
-        SceneManager.LoadScene("Quadrics");
+        SceneTransition transition = target.GetComponent<SceneTransition>();
+        if (transition != null)
+        {
+            transition.GoToScene("Quadrics");
+        }
+        else
+        {
+            SceneManager.LoadScene("Quadrics");
+        }
     }
     public static void ToCubics(Transform target)
     {
-        SceneManager.LoadScene("Cubics");
+        SceneTransition transition = target.GetComponent<SceneTransition>();
+        if (transition != null)
+        {
+            transition.GoToScene("Cubics");
+        }
+        else
+        {
+            SceneManager.LoadScene("Cubics");
+        }
     }
     public static void ToQuartics(Transform target)
     {
-        SceneManager.LoadScene("Quartics");
+        SceneTransition transition = target.GetComponent<SceneTransition>();
+        if (transition != null)
+        {
+            transition.GoToScene("Quartics");
+        }
+        else
+        {
+            SceneManager.LoadScene("Quartics");
+        }
     }
 
     public static void Check(Transform target)
