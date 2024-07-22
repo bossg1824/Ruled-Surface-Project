@@ -92,7 +92,7 @@ public class ButtonFunctions
             {
                 if (!p.OnCheck())
                 {
-                   // success = false;
+                    success = false;
                     break;
                 }
             }

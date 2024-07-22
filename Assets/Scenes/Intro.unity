@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &113807309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,10 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   releasing: 1
-  events:
-  - ToShow: {fileID: 257008724}
-    TimeToShowAt: 360
-    ToDo: 0
+  events: []
   ExtraTimeForAlll: 0
   TimeMultForAll: 1
 --- !u!4 &113807310
@@ -447,19 +444,19 @@ MonoBehaviour:
   player: {fileID: 468019243}
   events:
   - ToShow: {fileID: 1312927626}
-    TimeToShowAt: 310
+    TimeToShowAt: 300
     ToDo: 4
   - ToShow: {fileID: 935288014}
-    TimeToShowAt: 310
+    TimeToShowAt: 300
     ToDo: 4
   - ToShow: {fileID: 1814550955}
-    TimeToShowAt: 310
+    TimeToShowAt: 300
     ToDo: 4
   - ToShow: {fileID: 981242169}
-    TimeToShowAt: 310
+    TimeToShowAt: 300
     ToDo: 4
   - ToShow: {fileID: 1057318983}
-    TimeToShowAt: 310
+    TimeToShowAt: 300
     ToDo: 4
   - ToShow: {fileID: 118809871}
     TimeToShowAt: 290
@@ -494,6 +491,9 @@ MonoBehaviour:
   - ToShow: {fileID: 958672913}
     TimeToShowAt: 255
     ToDo: 3
+  - ToShow: {fileID: 257008724}
+    TimeToShowAt: 250
+    ToDo: 4
 --- !u!1001 &480941314
 PrefabInstance:
   m_ObjectHideFlags: 0

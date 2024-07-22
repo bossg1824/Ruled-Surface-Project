@@ -410,30 +410,43 @@ MonoBehaviour:
   events:
   - ToShow: {fileID: 811472841}
     TimeToShowAt: 4
+    ToDo: 4
   - ToShow: {fileID: 1091337173}
     TimeToShowAt: 5.5
+    ToDo: 4
   - ToShow: {fileID: 942725223}
     TimeToShowAt: 7
+    ToDo: 4
   - ToShow: {fileID: 385772470}
     TimeToShowAt: 8.5
+    ToDo: 4
   - ToShow: {fileID: 495405888}
     TimeToShowAt: 11
+    ToDo: 4
   - ToShow: {fileID: 1718950551}
     TimeToShowAt: 12.5
+    ToDo: 4
   - ToShow: {fileID: 1999330301}
     TimeToShowAt: 14
+    ToDo: 4
   - ToShow: {fileID: 614295847}
     TimeToShowAt: 15.5
+    ToDo: 4
   - ToShow: {fileID: 2011863149}
     TimeToShowAt: 18
+    ToDo: 4
   - ToShow: {fileID: 2044162995}
     TimeToShowAt: 19.5
+    ToDo: 4
   - ToShow: {fileID: 1622988188}
     TimeToShowAt: 21
+    ToDo: 4
   - ToShow: {fileID: 903910292}
     TimeToShowAt: 22.5
+    ToDo: 4
   - ToShow: {fileID: 1670789950}
     TimeToShowAt: 30
+    ToDo: 4
   ExtraTimeForAlll: 0
   TimeMultForAll: 1
 --- !u!4 &200264178
@@ -1140,7 +1153,7 @@ PrefabInstance:
     - target: {fileID: 7391866509949615051, guid: ceeeb8148af2f644cb9597dff6a4cdc0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.88
+      value: -6.962
       objectReference: {fileID: 0}
     - target: {fileID: 7391866509949615051, guid: ceeeb8148af2f644cb9597dff6a4cdc0,
         type: 3}
