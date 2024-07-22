@@ -101,7 +101,7 @@ MonoBehaviour:
   - Rulled Surface
   - Developable Ruled Surface
   - Conoid
-  - Non-Developable Ruled Surface
+  - Non Developable Ruled Surface
   TagsToAccept:
   - Developable Ruled Surface
   - Conoid

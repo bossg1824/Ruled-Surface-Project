@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using static UnityEngine.Mathf;
 
@@ -8,8 +9,8 @@ public class Functions
 {
     public delegate Vector3[] Function(int numpoints, float scale, bool negatives, float timesThrough, Vector3 offset, Quaternion rotation);
 
-    public enum FunctionName { Circle, Line, Helix, Parabola, CircleSine, SinLine, Oloid1, Oloid2 };
-    static Function[] functions = { Circle, Line, Helix, Parabola, CircleSine, SinLine, Oloid1, Oloid2 };
+    public enum FunctionName { Circle, Line, Helix, Parabola, CircleSine, SinLine, Oloid1, Oloid2, Mobius1, Mobius2 };
+    static Function[] functions = { Circle, Line, Helix, Parabola, CircleSine, SinLine, Oloid1, Oloid2, Mobius1, Mobius2 };
 
 
     public static Function GetFunction(int index)
@@ -156,6 +157,39 @@ public class Functions
         return vals;
     }
 
+    public static Vector3[] Mobius1(int numpoints, float scale, bool negatives, float timesThrough, Vector3 offset, Quaternion rotation)
+    {
+        Vector3[] vals = new Vector3[numpoints];
+
+        for (int i = 0, j = negatives ? -(numpoints / 2) : 0; i < numpoints; i++, j++)
+        {
+            Vector3 next = new Vector3();
+            float progress = 2 * PI * j * timesThrough / (float)numpoints;
+            next.x = scale * 2 * Cos(progress);
+            next.y = 0;
+            next.z = scale * 2 * Sin(progress);
+            vals[i] = next;
+        }
+        ApplyOfRot(vals, offset, rotation);
+        return vals;
+    }
+
+    public static Vector3[] Mobius2(int numpoints, float scale, bool negatives, float timesThrough, Vector3 offset, Quaternion rotation)
+    {
+        Vector3[] vals = new Vector3[numpoints];
+
+        for (int i = 0, j = negatives ? -(numpoints / 2) : 0; i < numpoints; i++, j++)
+        {
+            Vector3 next = new Vector3();
+            float progress = 2 * PI * j * timesThrough / (float)numpoints;
+            next.x = scale * Cos(Cos(progress/2f) - 2);
+            next.y = scale * Sin(progress/2f);
+            next.z = scale * (Cos(progress/2f) - 2) * Sin(progress);
+            vals[i] = next;
+        }
+        ApplyOfRot(vals, offset, rotation);
+        return vals;
+    }
     private static void ApplyOfRot(Vector3[] input, Vector3 offset, Quaternion rotation)
     {
         for (int i = 0; i < input.Length; i++)

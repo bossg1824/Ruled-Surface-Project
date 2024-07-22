@@ -92,7 +92,7 @@ public class ButtonFunctions
             {
                 if (!p.OnCheck())
                 {
-                    success = false;
+                   // success = false;
                     break;
                 }
             }
@@ -102,8 +102,22 @@ public class ButtonFunctions
         {
             if(l != null)
             {
-                l.color = success ? Color.red : Color.green;
+                l.intensity = 5;
+                l.color = success ? Color.green : Color.red;
             }
+        }
+
+        if (success)
+        {
+            ButtonScript changing = target.GetComponent<ButtonScript>();
+            while(changing.functions.Count > 0)
+            {
+                changing.functions.RemoveAt(0);
+            }
+            ButtonScript.funcTargetCell newFunc = new ButtonScript.funcTargetCell();
+            newFunc.function = buttonFuncName.ToQuadrics;
+            newFunc.target = targets.transition.transform;
+            changing.functions.Add(newFunc);
         }
     }
 
